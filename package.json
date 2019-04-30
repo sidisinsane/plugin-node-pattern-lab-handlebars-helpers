@@ -1,0 +1,24 @@
+{
+  "name": "plugin-node-pattern-lab-handlebars-helpers",
+  "version": "0.0.1",
+  "description": "Adds several Handlebars JS helper to Pattern Lab",
+  "author": {
+    "name": "Dirk Sidney Jansen"
+  },
+  "homepage": "https://github.com/sidisinsane/plugin-node-pattern-lab-handlebars-helpers#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sidisinsane/plugin-node-pattern-lab-handlebars-helpers.git"
+  },
+  "bugs": {
+    "url": "https://github.com/sidisinsane/plugin-node-pattern-lab-handlebars-helpers/issues"
+  },
+  "scripts": {
+    "postinstall": "node ./postinstall.js"
+  },
+  "dependencies": {},
+  "bundleDependencies": false,
+  "deprecated": false
+}
