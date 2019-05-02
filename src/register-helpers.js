@@ -92,7 +92,9 @@ function registerHelpers(patternlab, Handlebars) {
      * @returns {string} 'block__element'
      */
     Handlebars.registerHelper('bemElementOf', function(block, element) {
-        return block + '__' + element;
+        if (typeof block !== 'undefined' && typeof element !== 'undefined') {
+            return block + '__' + element;
+        }
     });
 
 }
