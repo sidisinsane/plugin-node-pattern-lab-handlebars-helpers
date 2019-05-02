@@ -1,7 +1,13 @@
 'use strict';
 
 function registerHelpers(patternlab, Handlebars) {
-    Handlebars.registerHelper("slugify", function(str) {
+    /**
+     * @example
+     *   {{ slugify 'I am a title' }}
+     *
+     * @returns {string} 'i-am-a-title'
+     */
+    Handlebars.registerHelper('slugify', function(str) {
         /*
          * Copyright (c) 2014 Jon Schlinkert
          * Licensed under the MIT license.
@@ -46,8 +52,8 @@ function registerHelpers(patternlab, Handlebars) {
             return '';
         }
 
-        var from = "ąàáäâãåæăćęèéëêìíïîłńòóöôõøśșțùúüûñçżź";
-        var to = "aaaaaaaaaceeeeeiiiilnoooooosstuuuunczz";
+        var from = 'ąàáäâãåæăćęèéëêìíïîłńòóöôõøśșțùúüûñçżź';
+        var to = 'aaaaaaaaaceeeeeiiiilnoooooosstuuuunczz';
         var regex = new RegExp(defaultToWhiteSpace(from), 'g');
         str = String(str).toLowerCase().replace(regex, function (c) {
             var index = from.indexOf(c);
@@ -56,6 +62,39 @@ function registerHelpers(patternlab, Handlebars) {
 
         return dasherize(str.replace(/[^\w\s-]/g, '')).replace(/^\W|\W$/g, '');
     });
+
+    /**
+     * @example
+     *   {{ bemModifier 'block' [ 'modifier-1', 'modifier-2' ] }}
+     *
+     * @returns {string} 'block block--modifier-1 block--modifier-2'
+     */
+    Handlebars.registerHelper('bemModifier', function(block, modifier) {
+        var classes = block;
+
+        if (typeof modifier !== 'undefined') {
+            if (Array.isArray(modifier)) {
+                for (var i = 0; i < modifier.length; i++) {
+                    classes += ' ' + block + '--' + modifier[i];
+                }
+            } else {
+                classes += ' ' + block + '--' + modifier;
+            }
+        }
+
+        return classes;
+    });
+
+    /**
+     * @example
+     *   {{ bemElementOf 'block' 'element' }}
+     *
+     * @returns {string} 'block__element'
+     */
+    Handlebars.registerHelper('bemElementOf', function(block, element) {
+        return block + '__' + element;
+    });
+
 }
 
 module.exports = registerHelpers;

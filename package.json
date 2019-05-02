@@ -1,6 +1,6 @@
 {
   "name": "plugin-node-pattern-lab-handlebars-helpers",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Adds several Handlebars JS helper to Pattern Lab",
   "author": {
     "name": "Dirk Sidney Jansen"
@@ -16,9 +16,13 @@
     "url": "https://git.pixelpark.com/maxon-motor/plugin-node-pattern-lab-handlebars-helpers/issues"
   },
   "scripts": {
-    "postinstall": "node ./postinstall.js"
+    "postinstall": "node ./postinstall.js",
+    "changelog": "changelog generate"
   },
   "dependencies": {},
   "bundleDependencies": false,
-  "deprecated": false
+  "deprecated": false,
+  "devDependencies": {
+    "generate-changelog": "^1.7.1"
+  }
 }
