@@ -50,3 +50,29 @@ Renders to:
 ```
 block__element
 ```
+
+## compare helper (stolen form [hellokatili](https://github.com/hellokatili/plugin-node-pattern-lab-handlebars-helpers))
+
+The `compare` helper takes 3 arguments: value1 operator value2
+### Example
+
+```
+{{#compare unicorns '!=' ponies}}
+  I knew it, unicorns are NOT ponies!
+{{/compare}}
+```
+
+## math helper (stolen form [hellokatili](https://github.com/hellokatili/plugin-node-pattern-lab-handlebars-helpers))
+
+The `math` helper takes 3 arguments: value1 operator value2
+### Example
+
+```
+{{math 5 '+' 37}}
+```
+
+Renders to:
+
+```
+42
+```
