@@ -3,7 +3,7 @@
 function registerHelpers(patternlab, Handlebars) {
     /**
      * @example
-     *   {{ slugify 'I am a title' }}
+     * {{ slugify 'I am a title' }}
      *
      * @returns {string} 'i-am-a-title'
      */
@@ -65,7 +65,7 @@ function registerHelpers(patternlab, Handlebars) {
 
     /**
      * @example
-     *   {{ bemModifier 'block' [ 'modifier-1', 'modifier-2' ] }}
+     * {{ bemModifier 'block' [ 'modifier-1', 'modifier-2' ] }}
      *
      * @returns {string} 'block block--modifier-1 block--modifier-2'
      */
@@ -87,7 +87,7 @@ function registerHelpers(patternlab, Handlebars) {
 
     /**
      * @example
-     *   {{ bemElementOf 'block' 'element' }}
+     * {{ bemElementOf 'block' 'element' }}
      *
      * @returns {string} 'block__element'
      */
@@ -97,6 +97,57 @@ function registerHelpers(patternlab, Handlebars) {
         }
     });
 
+    // Stolen from https://github.com/hellokatili/plugin-node-pattern-lab-handlebars-helpers
+    /**
+     * The compare helper takes 3 arguments: value1 operator value2
+     *
+     * @example
+     * {{#compare unicorns '!=' ponies}}
+     *   I knew it, unicorns are NOT ponies!
+     * {{/compare}}
+     */
+    Handlebars.registerHelper('compare', function (v1, operator, v2, options) {
+        'use strict';
+        var operators = {
+            '==': v1 == v2 ? true : false,
+            '===': v1 === v2 ? true : false,
+            '!=': v1 != v2 ? true : false,
+            '!==': v1 !== v2 ? true : false,
+            '>': v1 > v2 ? true : false,
+            '>=': v1 >= v2 ? true : false,
+            '<': v1 < v2 ? true : false,
+            '<=': v1 <= v2 ? true : false,
+            '||': v1 || v2 ? true : false,
+            '&&': v1 && v2 ? true : false,
+            'typeof': typeof v1 == v2 ? true : false
+        };
+        if (operators.hasOwnProperty(operator)) {
+            if (operators[operator]) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        }
+        return console.error('Error: Expression "' + operator + '" not found');
+    });
+
+    /**
+     * The math helper takes 3 arguments: value1 operator value2
+     *
+     * @example
+     * {{math 5 '+' 37}}
+     */
+    Handlebars.registerHelper("math", function(lvalue, operator, rvalue, options) {
+        lvalue = parseFloat(lvalue);
+        rvalue = parseFloat(rvalue);
+
+        return {
+            "+": lvalue + rvalue,
+            "-": lvalue - rvalue,
+            "*": lvalue * rvalue,
+            "/": lvalue / rvalue,
+            "%": lvalue % rvalue
+        }[operator];
+    });
 }
 
 module.exports = registerHelpers;
